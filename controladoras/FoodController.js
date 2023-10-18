@@ -21,7 +21,7 @@ const upload = multer({ storage });
 //Cargar una nueva comida
 router.post('/cargar',LoginController.verificarToken,async (req,res) => {
   let comida = new Comida();
-  comida.setIdUsuario(LoginController.extrarId(req.headers.authorization));
+  comida.setIdUsuario(await LoginController.extrarId(req.headers.authorization));
   comida.setNombre(req.body.nombre);
   comida.setDescripcion(req.body.descripcion);
   comida.setPrecio(req.body.precio);

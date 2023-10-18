@@ -28,7 +28,7 @@ router.post('/info', async function (req,res,next){
 //editar al restaurante (se debe probar)
 router.post("/editar",LoginController.verificarToken, async function(req,res,next){
     let restaurante = new Restaurante()
-    let id = LoginController.extrarId(req.headers.authorization);
+    let id = await LoginController.extrarId(req.headers.authorization);
     restaurante.setNombreResto(req.body.nombreResto);
     restaurante.setDescripcion(req.body.descripcion);
     restaurante.setContacto(req.body.contacto);

@@ -7,7 +7,7 @@ const router = express.Router();
 //ver info del comensal
 router.get('/', async function (req, res, next){
     let comensal = new Comensal();
-    let respuesta = await comensal.infoComensal(LoginController.extrarId(req.headers.authorization));
+    let respuesta = await comensal.infoComensal(await LoginController.extrarId(req.headers.authorization));
     if(respuesta == null){
         res.status(401);
         res.send('Error en lectura de informacion del comensal.')
@@ -19,7 +19,7 @@ router.get('/', async function (req, res, next){
 //editar informacion comensal (Falta probar.)
 router,post("/editar", async function(req,res,next){
     let comensal = new Comensal();
-    let id = LoginController.extrarId(req.headers.authorization);
+    let id = await LoginController.extrarId(req.headers.authorization);
     comensal.setNombre(req.body.nombre);
     comensal.setApellido(req.body.apellido);
     comensal.setUsuario(usuario);
