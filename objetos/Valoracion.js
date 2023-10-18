@@ -41,7 +41,7 @@ setComentario(comentario){
 
 //--Cargar valoracion--
 async cargarValoracion(){
-    let respuesta = await ValoracionModel.CargarValoracion(this.#id_usuario,this.#id_comida,this.#puntaje,this.#comentario)
+    let respuesta = await ValoracionModel.cargarValoracion(this.#id_usuario,this.#id_comida,this.#puntaje,this.#comentario)
     if(respuesta){
         return 200;
     }else{

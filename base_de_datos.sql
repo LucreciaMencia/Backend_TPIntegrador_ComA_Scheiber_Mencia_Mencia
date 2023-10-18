@@ -48,6 +48,8 @@ CREATE TABLE IF NOT EXISTS valoracion(
     id_valoracion INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
     id_comida INT NOT NULL,
+    puntaje INT NOT NULL,
+    comentario TEXT NOT NULL,
     FOREIGN KEY (id_usuario) REFERENCES comensal(id_usuario),
     FOREIGN KEY (id_comida) REFERENCES comida(id_comida)
 )ENGINE=InnoDB;

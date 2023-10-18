@@ -5,6 +5,7 @@ const RegistroController = require('./controladoras/RegistroController')
 const FoodController = require('./controladoras/FoodController')
 const RestoController = require('./controladoras/RestoController')
 const ComesalesController = require('./controladoras/ComensalesController');
+const ValoracionController = require('./controladoras/ValoracionController');
 let app = express();
 const db = new Database();
 const cors = require('cors')
@@ -12,8 +13,6 @@ const corsOptions = {origin : 'http://localhost:3000'}
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-
 
 //Aca direccionamos a las controladoras
 app.use('/sesion',LoginController.router);
@@ -27,5 +26,7 @@ app.use('/comida', FoodController);
 app.use('/restaurante',RestoController);
 //esto es para comensales 
 app.use('/comensal', LoginController.verificarToken,ComesalesController)
+//esto es para hacer una valoracion
+app.use('/valoracion', ValoracionController);
 
 app.listen(8080);

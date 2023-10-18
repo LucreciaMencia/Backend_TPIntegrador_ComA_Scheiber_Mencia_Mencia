@@ -13,10 +13,10 @@ router.post('/cargar',LoginController.verificarToken,async (req,res) => {
     }
   */
     let valoracion = new Valoracion();
-    valoracion.setIdUsuario(LoginController.extrarId(req.headers.authorization));
+    valoracion.setIdUsuario(await LoginController.extrarId(req.headers.authorization));
     valoracion.setIdComida(req.body.idComida);
     valoracion.setPuntaje(req.body.puntaje); 
-    valoracion.cargarValoracion(req.body.comentario);
+    valoracion.setComentario(req.body.comentario);
     let respuesta = await valoracion.cargarValoracion();
     if(respuesta == 200){
       res.status(respuesta);
@@ -28,3 +28,5 @@ router.post('/cargar',LoginController.verificarToken,async (req,res) => {
     
     
   })
+
+  module.exports = router;
