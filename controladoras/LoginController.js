@@ -85,7 +85,7 @@ function verificarToken(req, res, next) {
   });
 }
 
-function extraerId(tkn) {
+async function extraerId(tkn) {
   const promise = new Promise((resolve, reject) => {
     const token = tkn.split(' ')[1];
 
