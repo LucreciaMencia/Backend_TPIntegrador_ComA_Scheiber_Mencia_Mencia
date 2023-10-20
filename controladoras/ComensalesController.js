@@ -17,7 +17,7 @@ router.get('/', async function (req, res, next){
     }
 
 //editar informacion comensal (Falta probar.)
-router,post("/editar", async function(req,res,next){
+router.post("/editar", async function(req,res,next){
     let comensal = new Comensal();
     let id = await LoginController.extrarId(req.headers.authorization);
     comensal.setNombre(req.body.nombre);
