@@ -5,25 +5,23 @@ const router = express.Router();
 
 
 //cargar Nueva valoracion -Falta Probar-
-router.post('/cargar',LoginController.verificarToken,async (req,res) => {
+router.post('/',LoginController.verificarToken,async (req,res) => {
   /*{
     "idComida":"",
-    "puntaje":"",
-    "comentario":""
+    "estrellas":"",
     }
   */
     let valoracion = new Valoracion();
     valoracion.setIdUsuario(await LoginController.extrarId(req.headers.authorization));
     valoracion.setIdComida(req.body.idComida);
-    valoracion.setPuntaje(req.body.puntaje); 
-    valoracion.setComentario(req.body.comentario);
+    valoracion.setPuntaje(req.body.estrellas); 
     let respuesta = await valoracion.cargarValoracion();
     if(respuesta == 200){
       res.status(respuesta);
-      res.json({"message":"Valoracion cargada"})
+      res.json({"mensaje":"Valoracion cargada"})
     }else{
       res.status(respuesta);
-      res.json({"message":"Upss! algo salio mal :("})
+      res.json({"mensaje":"Upss! algo salio mal :("})
     }
     
     
