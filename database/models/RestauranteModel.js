@@ -83,6 +83,23 @@ class RestauranteController {
       });
     });
   }
+  //traer el menu del restaurante
+  static async traerMenu(id){
+    return new Promise((resolve, reject) => {
+      let db = new Database();
+      let $query = 'SELECT id_comida, nombre_comida, precio_comida, descripcion_comida, promedio_estrellas, nombre_resto FROM comida INNER JOIN restaurante ON restaurante.id_usuario=comida.id_usuario AND restaurante.id_usuario=?';
+      db.getConexion().query($query, id,function(err,rows,fields){
+        if (err) {
+          console.log("An error ocurred performing the query.");
+          reject(err); // Rechaza la promesa en caso de error
+        } else if (rows.length === 0) {
+          resolve(false); 
+        }else{
+          resolve(rows);
+        }
+      });
+    });
+  }
 }
 
 module.exports = RestauranteController;

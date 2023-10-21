@@ -104,8 +104,16 @@ async traerRestaurantes(){
     return respuesta;
   }
 }
-
-//--------Editar restaurante--------------
+//---------Traer menu del restaurante-------------
+async mostrarMenu(){
+  let respuesta = await RestauranteModel.traerMenu(this.#usuario.getId_usuario());
+  if(respuesta == false){
+    return {"message":"El restaurante no tiene comidas cargadas."};
+  }else {
+    return respuesta;
+  }
+}
+//--------Editar restaurante (falta terminar)--------------
 async editarRestaurante(id){
   let respuesta = await RestauranteModel.modificar(id, this.#nombre_resto, this.#descripcion_resto, this.#horario, this.#contacto, this.#ubicacion);
 }

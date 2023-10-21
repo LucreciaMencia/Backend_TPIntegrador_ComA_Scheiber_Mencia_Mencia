@@ -42,4 +42,17 @@ router.post("/editar",LoginController.verificarToken, async function(req,res,nex
     }
 })
 
+//traer comidas de un restaurante
+router.get("/menu",async function(req,res,next){
+    let restaurante = new Restaurante();
+    restaurante.getUsuario().setId_usuario(req.query.id_restaurante);
+    let respuesta = await restaurante.mostrarMenu();
+    if(respuesta.message == null){
+        res.status(201).send(respuesta);
+    }else{
+        res.status(404).json(respuesta);
+    }
+    
+})
+
 module.exports = router;
