@@ -14,10 +14,10 @@ router.get('/', async function (req, res, next){
     }
 })
 
-//traer info de un restaurante JSON {"idRestaurante":"24"}
-router.post('/info', async function (req,res,next){
+//traer info de un restaurante
+router.get('/:id', async function (req,res,next){
     let restaurante = new Restaurante();
-    let respuesta = await restaurante.infoRestaurante(req.body.idRestaurante);
+    let respuesta = await restaurante.infoRestaurante(req.params.id);
     if(respuesta == null){
         res.status(404).send("Error al intentar recibir la informacion del restaurante");
     }else{

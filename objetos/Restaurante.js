@@ -87,7 +87,7 @@ async registrarRestaurante(){
 }
 //-Traer la informacion del restaurante----
 async infoRestaurante(id){
- let respuesta = RestauranteModel.traerRestaurante(id);
+ let respuesta = await RestauranteModel.traerRestaurante(id);
  if(respuesta == null){
   return respuesta;
  }else{

@@ -21,7 +21,7 @@ class RestauranteController {
   static async traerRestaurante(restauranteId){
     return new Promise((resolve,reject)=>{
       let db = new Database();
-      let $query = "SELECT * FROM restaurante WHERE  id_usuario = ?"
+      let $query = "SELECT * FROM restaurante WHERE id_usuario=?;"
       db.getConexion().query($query, restauranteId, function(err, rows, fields){
         if(err){
           resolve (null) 
