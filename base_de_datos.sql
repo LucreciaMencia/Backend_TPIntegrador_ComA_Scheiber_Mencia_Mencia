@@ -53,4 +53,9 @@ CREATE TABLE IF NOT EXISTS valoracion(
     FOREIGN KEY (id_comida) REFERENCES comida(id_comida)
 )ENGINE=InnoDB;
 
-
+CREATE TABLE IF NOT EXISTS imagen(
+id_imagen INT AUTO_INCREMENT PRIMARY KEY,
+id_comida INT NOT NULL,
+ruta VARCHAR (255),
+FOREIGN KEY (id_comida) REFERENCES comida(id_comida)
+)ENGINE=InnoDB;
