@@ -115,7 +115,7 @@ async mostrarMenu(){
 }
 //--------Editar restaurante (falta terminar)--------------
 async editarRestaurante(id){
-  let respuesta = await RestauranteModel.modificar(id, this.#nombre_resto, this.#descripcion_resto, this.#horario, this.#contacto, this.#ubicacion);
+  return await RestauranteModel.modificar(id, this.#nombre_resto, this.#descripcion_resto, this.#horario, this.#contacto, this.#ubicacion);
 }
 }
 

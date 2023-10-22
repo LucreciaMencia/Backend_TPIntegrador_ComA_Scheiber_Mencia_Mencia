@@ -25,16 +25,16 @@ router.get('/:id', async function (req,res,next){
     }
 })
 
-//editar al restaurante (se debe probar)
-router.post("/editar",LoginController.verificarToken, async function(req,res,next){
+//editar al restaurante (se debe probar) MM-29
+router.put("/:id_usuario",LoginController.verificarToken, async function(req,res,next){
     let restaurante = new Restaurante()
-    let id = await LoginController.extrarId(req.headers.authorization);
-    restaurante.setNombreResto(req.body.nombreResto);
+    let id = req.params.id_usuario;
+    restaurante.setNombreResto(req.body.nombre);
     restaurante.setDescripcion(req.body.descripcion);
     restaurante.setContacto(req.body.contacto);
     restaurante.setHorario(req.body.horario);
     restaurante.setUbicacion(req.body.ubicacion);
-    let respuesta = await comensal.editarComensal(id);
+    let respuesta = await restaurante.editarRestaurante(id);
     if(respuesta == true){
         res.status(201).send("Cambios aplicados.");
     }else{
@@ -55,4 +55,9 @@ router.get("/menu",async function(req,res,next){
     
 })
 
+//eliminar al restaurante () MM-30
+router.delete("/:id_usuario",async function(req,res,next){
+
+    
+})
 module.exports = router;
