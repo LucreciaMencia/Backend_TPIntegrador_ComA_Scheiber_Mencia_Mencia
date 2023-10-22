@@ -17,5 +17,22 @@ class ValoracionModel{
             });
           });
     }
+
+    static async valoracionesComensal(idComensal){
+      return new Promise((resolve, reject) => {
+        let db = new Database();
+        let $query = 'SELECT * FROM valoracion WHERE id_usuario = ? ';
+        db.getConexion().query($query, idComensal, function (err, rows, fields) {
+          if (err) {
+            //False significa un error en la conexion a la DB
+            console.log(err);
+            console.log(idComensal);
+            resolve(false);
+          } else {
+            resolve(rows);
+          }
+        });
+      });
+    }
 }
 module.exports = ValoracionModel;

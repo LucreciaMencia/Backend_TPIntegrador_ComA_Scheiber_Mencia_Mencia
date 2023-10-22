@@ -49,6 +49,16 @@ async cargarValoracion(){
     }    
 }
 
+//--traer valoracion de comensal--
+async valoracionesComensal(idComensal){
+    let respuesta = await ValoracionModel.valoracionesComensal(idComensal);
+    if(respuesta == false){
+        return {"mensaje":"Error al comunicarse con la BD"}
+    }else{
+        return respuesta;
+    }
+}
+
 
 }
 

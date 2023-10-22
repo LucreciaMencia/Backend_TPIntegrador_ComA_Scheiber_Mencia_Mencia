@@ -27,4 +27,19 @@ router.post('/',LoginController.verificarToken,async (req,res) => {
     
   })
 
+  //obtener todas las valoraciones de un usuario
+  router.get('/',async (req,res) => {
+
+    let valoracion = new Valoracion();
+    console.log(req.query.id_usuario);
+    let respuesta = await valoracion.valoracionesComensal(req.query.id_usuario);
+    if(respuesta == false){
+      res.status(404).send(respuesta);
+    }else{
+      res.status(201).send(respuesta);
+    }
+
+      
+    })
+
   module.exports = router;
