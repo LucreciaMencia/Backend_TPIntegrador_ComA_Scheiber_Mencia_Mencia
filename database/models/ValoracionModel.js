@@ -34,5 +34,20 @@ class ValoracionModel{
         });
       });
     }
+
+    static async borrar(idComensal){
+      return new Promise((resolve, reject) => {
+        let db = new Database();
+        let $query = ' DELETE FROM valoracion WHERE id_valoracion = ? ';
+        db.getConexion().query($query, idComensal, function (err, rows, fields) {
+          if (err) {
+            //False significa un error en la conexion a la DB
+            resolve(false);
+          } else {
+            resolve(true);
+          }
+        });
+      });
+    }
 }
 module.exports = ValoracionModel;

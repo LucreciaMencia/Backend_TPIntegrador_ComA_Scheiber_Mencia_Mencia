@@ -59,6 +59,10 @@ async valoracionesComensal(idComensal){
     }
 }
 
+async borrar(idComensal){
+    return await ValoracionModel.borrar(idComensal);
+}
+
 
 }
 
