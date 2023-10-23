@@ -1,4 +1,6 @@
 var mysql = require('mysql');
+require('dotenv').config() // se necesita este import en cada archivo donde necesite leer algo del archivo .env
+
 
 class Database{
 // Agregue las credenciales para acceder a su base de datos
@@ -12,8 +14,8 @@ class Database{
             this.connection = mysql.createConnection({
                 host: 'localhost',
                 user: 'root',
-                password: 's711',
-                database: 'mi_menu'
+                password: process.env.DB_PASS,
+                database: process.env.DB_NAME
             });
 
             this.connection.connect(function(err) {
