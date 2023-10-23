@@ -7,10 +7,12 @@ const fs = require('fs');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 const multer = require('multer');
+require('dotenv').config() // se necesita este import en cada archivo donde necesite leer algo del archivo .env
+
 const storage = multer.diskStorage(
     {
         destination: (req, file, cb) => {
-          cb(null, 'Backend/Comidas'); // Carpeta donde se guardarán las imágenes
+          cb(null, process.env.RUTA_IMAGENES_CARGADAS); // Carpeta donde se guardarán las imágenes
         },
         filename: (req, file, cb) => {
           cb(null, file.originalname);
@@ -37,7 +39,7 @@ router.post('/cargar',LoginController.verificarToken,async (req,res) => {
 })
 
 //Carga la imagen de una nueva comida - LA IMAGEN DEBE SER .JPEG
-router.post("/imagen",LoginController.verificarToken, upload.single('image'),async (req,res) => {
+router.post("/imagen", LoginController.verificarToken, upload.single('image'), async (req,res) => {
   res.send('Imagen recibida y guardada');
 })
 
