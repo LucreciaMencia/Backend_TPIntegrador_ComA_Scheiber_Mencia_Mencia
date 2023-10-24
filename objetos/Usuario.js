@@ -83,6 +83,25 @@ class Usuario{
                 return respuesta                              
         }
     }
+    //---------Traer datos del usuario------------
+    async traerUsuario(){
+        let respuesta = await UsuarioModel.traerInfo(this.#id_usuario);
+        if(respuesta == false){
+            return {"mensaje":"no se encontro registro"}
+        }else{
+            return respuesta
+        }
+    }
+    //-----------Actualizar usuario---------------
+    async actualizarUsuario(){
+        let respuesta = await UsuarioModel.actualizar(this.#id_usuario,this.#nickname,this.#mail,this.#password);
+        if(respuesta == true){
+            return {"mensaje":"Exito al actualizar."}
+        }else{
+            return {"mensaje":"Error al actualizar."}
+        }
+
+    }
 
    toJSON(){
         let usuario = {

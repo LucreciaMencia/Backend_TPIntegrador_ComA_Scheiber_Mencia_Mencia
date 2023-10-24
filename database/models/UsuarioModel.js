@@ -89,6 +89,43 @@ class UsuarioController{
 
       });
     }
+    //traer info del usuario 
+    static async traerInfo(id){
+      return new Promise((resolve, reject) => {
+        let db = new Database();
+        let $query = 'SELECT nickname, mail from usuario WHERE id_usuario = ?';
+        db.getConexion().query($query,id,function(err,rows,fields){
+          if (err) {
+            console.log("An error ocurred performing the query.");
+            reject(err); // Rechaza la promesa en caso de error
+          } else if (rows.length === 0) {
+            console.log(rows);
+            resolve(false); // Resuelve la promesa con false si no se encontraron registros
+          }else{
+            console.log(rows);
+            resolve(rows[0]);
+          }
+        });
+
+      });
+    }
+    //modificar
+    static async actualizar(id, nickname, mail, password){
+      return new Promise((resolve, reject) => {
+        let db = new Database();
+        let $query = 'UPDATE usuario SET nickname=?, mail=?, password=? WHERE id_usuario=?';
+        db.getConexion().query($query, [nickname,mail,password,id], function (err, rows, fields) {
+          if (err) {
+            //False significa un error en la conexion a la DB
+            console.log(err);
+            resolve(false);
+          } else {
+            //True significa que la modificacion fue exitosa 
+            resolve(true);
+          }
+        });
+      });
+    }
 }
 
 module.exports = UsuarioController;
