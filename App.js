@@ -6,6 +6,7 @@ const FoodController = require('./controladoras/FoodController')
 const RestoController = require('./controladoras/RestoController')
 const ComesalesController = require('./controladoras/ComensalesController');
 const ValoracionController = require('./controladoras/ValoracionController');
+const UsuarioController = require ('./controladoras/UsuarioController')
 let app = express();
 const db = new Database();
 const cors = require('cors')
@@ -25,8 +26,9 @@ app.use('/comida', FoodController);
 //esto es para restaurantes
 app.use('/restaurante',RestoController);
 //esto es para comensales 
-app.use('/comensal', LoginController.verificarToken,ComesalesController)
-//esto es para hacer una valoracion
+app.use('/comensal',ComesalesController)
+//esto es para valoraciones
 app.use('/valoracion', ValoracionController);
-
+//esto es para usuarios
+app.use('/usuario',UsuarioController)
 app.listen(8080);

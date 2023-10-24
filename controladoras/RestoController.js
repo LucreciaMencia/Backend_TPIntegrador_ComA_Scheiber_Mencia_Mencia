@@ -25,7 +25,7 @@ router.get('/:id', async function (req,res,next){
     }
 })
 
-//editar al restaurante (se debe probar) MM-29
+//editar al restaurante MM-29
 router.put("/:id_usuario",LoginController.verificarToken, async function(req,res,next){
     let restaurante = new Restaurante()
     let id = req.params.id_usuario;
@@ -55,9 +55,14 @@ router.get("/menu",async function(req,res,next){
     
 })
 
-//eliminar al restaurante () MM-30
+//eliminar al restaurante MM-30(aun falta)
 router.delete("/:id_usuario",async function(req,res,next){
-
-    
+    let restaurante = new Restaurante();
+    restaurante.getUsuario().setId_usuario(req.params.id_usuario);
+    if(restaurante.eliminarRestaurante()){
+        res.status(201).send({"mensaje":"Restaurante eliminado."});
+    }else{
+        res.status(201).send({"mensaje":"Error al eliminar el restaurante."});
+    }
 })
 module.exports = router;

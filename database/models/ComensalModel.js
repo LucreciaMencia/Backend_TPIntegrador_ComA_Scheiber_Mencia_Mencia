@@ -21,7 +21,7 @@ class ComensalController {
   static async verInfo(id){
     return new Promise((resolve, reject) => {
       let db = new Database();
-      let $query = 'SELECT comensal.*, usuario.mail FROM comensal JOIN usuario ON comensal.id_usuario = usuario.id_usuario WHERE comensal.id_usuario = ?;';
+      let $query = 'SELECT nombre_comensal, apellido_comensal FROM comensal WHERE id_usuario=?';
       db.getConexion().query($query, id, function (err, rows, fields) {
         if (err) {
           console.log(err);

@@ -113,10 +113,15 @@ async mostrarMenu(){
     return respuesta;
   }
 }
-//--------Editar restaurante (falta terminar)--------------
+//--------Editar restaurante--------------
 async editarRestaurante(id){
   return await RestauranteModel.modificar(id, this.#nombre_resto, this.#descripcion_resto, this.#horario, this.#contacto, this.#ubicacion);
 }
+//--------Eliminar restaurante------------
+async eliminarRestaurante(){
+  return await RestauranteModel.eliminar(this.#usuario.getId_usuario());
+}
+
 }
 
 module.exports = Restaurante;
