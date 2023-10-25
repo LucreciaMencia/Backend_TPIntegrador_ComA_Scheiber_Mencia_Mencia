@@ -30,4 +30,15 @@ router.put("/:id", async function(req,res,next){
         res.status(404).send("Error al aplicar los cambios")
     }
 })
+
+//eliminar a un comensal MM-36
+router.delete("/:id", async function(req,res,next){
+    let comensal = new Comensal();
+    let respuesta = await comensal.eliminar(req.params.id);
+    if(respuesta == true){
+        res.status(201).send("La cuenta fue eliminada correctamente.");
+    }else{
+        res.status(404).send("Error al eliminar la cuenta.")
+    }
+})
 module.exports = router;

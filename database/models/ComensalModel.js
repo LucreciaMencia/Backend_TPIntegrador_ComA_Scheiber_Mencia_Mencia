@@ -50,6 +50,38 @@ class ComensalController {
       });
     });
   }
+
+  static async eliminarComensal(id){
+    return new Promise((resolve, reject) => {
+      let db = new Database();
+      let $query = 'DELETE FROM valoracion WHERE id_usuario = ?';
+      db.getConexion().query($query,id, function (err, rows, fields) {
+        if (err) {
+          //False significa un error en la conexion a la DB
+          console.log(err);
+          resolve(false);
+        } else {
+          $query = 'DELETE FROM comensal WHERE id_usuario = ?';
+          db.getConexion().query($query,id,function(err,rows,fields){
+            if(err){
+              console.log(err)
+              resolve (false);
+            }else{
+              $query = 'DELETE FROM usuario WHERE id_usuario = ?'
+              db.getConexion().query($query,id,function(err,rows,fields){
+                if(err){
+                  console.log(err);
+                  resolve(false);
+                }else{
+                  resolve (true);
+                }
+              })
+            }
+          })
+        }
+      });
+    });
+  }
 }
 
 module.exports = ComensalController;

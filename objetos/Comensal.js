@@ -75,6 +75,9 @@ class Comensal{
         let respuesta = await ComensalModel.modificar(id,this.#nombre_comensal,this.#apellido_comensal);
         return respuesta;
     }
-
+//----Eliminar comensal------
+    async eliminar(id){
+        return await ComensalModel.eliminarComensal(id);
+    }
 }
 module.exports = Comensal;

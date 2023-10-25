@@ -6,7 +6,6 @@ class Database{
 // Agregue las credenciales para acceder a su base de datos
     connection;
     static instance;
-
     /*Aqui deben colocar los datos para ingresar a SU base de datos, 
     que solo podria llegar a diferir su user y su password*/
     constructor() {
@@ -14,8 +13,8 @@ class Database{
             this.connection = mysql.createConnection({
                 host: 'localhost',
                 user: 'root',
-                password: process.env.DB_PASS,
-                database: process.env.DB_NAME
+                password:process.env.DB_PASS,
+                database:process.env.DB_NAME
             });
 
             this.connection.connect(function(err) {

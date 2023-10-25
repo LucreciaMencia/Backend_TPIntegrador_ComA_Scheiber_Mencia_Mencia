@@ -62,7 +62,6 @@ class Comida{
     setPromedio(promedio) {
         this.#promedio_estrellas = promedio;
     }
-
     //--------------------------------------------------
     async registrarComida() {
         let respuesta = await ComidaModel.cargarComida(this.#id_usuario,this.#precio_comida,this.#nombre_comida,this.#descripcion_comida);
@@ -72,6 +71,24 @@ class Comida{
             return respuesta;
         }
     }  
+    //----------traer info de una comida----------------
+    async mostrar(id){
+        console.log("aca estoy");
+        let respuesta = await ComidaModel.leerComida(id);
+        if(respuesta == false){
+            return {"mensaje":"Error al leer información."}
+        }else{
+            return respuesta
+        }
+    }
+    //---------------editar comida-----------------------
+    async editar(){
+        return await ComidaModel.editarComida(this.#id_comida,this.#nombre_comida,this.#precio_comida,this.#descripcion_comida)
+    }
+    //---------------eliminar comida----------------------
+    async eliminar(id){
+        return await ComidaModel.eliminarComida(id);
+    }
     
     
 }

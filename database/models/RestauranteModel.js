@@ -104,15 +104,35 @@ class RestauranteController {
   static async eliminar(id){
     return new Promise((resolve, reject) => {
       let db = new Database();
-      let $query = 'DELETE FROM valoracion WHERE id_comida IN (SELECT id_comida FROM comida WHERE id_usuario=?); DELETE FROM comida WHERE id_usuario=?; DELETE FROM restaurante WHERE id_usuario = ? ; DELETE FROM usuario WHERE id_usuario=?';
-      db.getConexion().query($query, [id,id,id,id], function (err, rows, fields) {
+      let $query = 'DELETE FROM valoracion WHERE id_comida IN (SELECT id_comida FROM comida WHERE id_usuario=?);';
+      db.getConexion().query($query, id, function (err, rows, fields) {
         if (err) {
           //False significa un error en la conexion a la DB
           console.log(err);
           resolve(false);
         } else {
-          //True significa que la modificacion fue exitosa 
-          resolve(true);
+          $query = 'DELETE FROM comida WHERE id_usuario=?;'
+          db.getConexion().query($query, id, function (err, rows, fields) {
+            if(err){
+              resolve(false);
+            }else{
+              $query = 'DELETE FROM restaurante WHERE id_usuario=?'
+              db.getConexion().query($query, id, function (err, rows, fields) {
+                if(err){
+                  resolve(false)
+                }else{
+                  $query = 'DELETE FROM usuario WHERE id_usuario=?'
+                  db.getConexion().query($query, id, function (err, rows, fields) {
+                    if(err){
+                      resolve(false);
+                    }else{
+                      resolve(true);
+                    }
+                  });
+                }
+              });
+            }
+          });
         }
       });
     });

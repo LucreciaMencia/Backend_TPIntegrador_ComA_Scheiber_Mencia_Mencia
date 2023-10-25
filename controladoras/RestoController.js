@@ -60,7 +60,7 @@ router.delete("/:id_usuario",async function(req,res,next){
     let restaurante = new Restaurante();
     restaurante.getUsuario().setId_usuario(req.params.id_usuario);
     if(restaurante.eliminarRestaurante()){
-        res.status(201).send({"mensaje":"Restaurante eliminado."});
+        res.status(201).send({"mensaje":"La cuenta se elimino con exito."});
     }else{
         res.status(201).send({"mensaje":"Error al eliminar el restaurante."});
     }

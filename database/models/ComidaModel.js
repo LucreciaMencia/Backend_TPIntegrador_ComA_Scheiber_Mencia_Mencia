@@ -25,6 +25,51 @@ class ComidaController{
         });
     }
 
+    static async leerComida(id){
+      return new Promise((resolve, reject) => {
+        let db = new Database();
+        let $query = 'SELECT * FROM comida WHERE id_comida = ?';
+        db.getConexion().query($query, id,function(err,rows,fields){
+          if (err) {
+            console.log(err);
+            resolve(false); 
+          }else{
+            console.log(rows[0]);
+            resolve(rows[0]);
+          }
+        });
+      });
+    }
+
+    static async editarComida(id,nombre,precio,descripcion){
+      return new Promise((resolve, reject) => {
+        let db = new Database();
+        let $query = 'UPDATE comida SET precio_comida=?,nombre_comida=?,descripcion_comida=? WHERE id_comida=?';
+        db.getConexion().query($query, [precio,nombre,descripcion,id],function(err,rows,fields){
+          if (err) {
+            resolve(false); 
+          }else{
+            resolve(true);
+          }
+        });
+      });
+    }
+
+    static async eliminarComida(id){
+      return new Promise((resolve, reject) => {
+        let db = new Database();
+        let $query = 'DELETE FROM comida WHERE id_comida = ?';
+        db.getConexion().query($query,id,function(err,rows,fields){
+          if (err) {
+            console.log(err);
+            resolve(false); 
+          }else{
+            resolve(true);
+          }
+        });
+      });
+    };
+
 }
 
 module.exports = ComidaController;

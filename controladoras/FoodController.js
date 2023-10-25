@@ -58,7 +58,42 @@ router.post("/image/descargar",async(req,res) => {
   });
 }); 
 
-//
+//--Traer datos de una comida MM-37
+router.get("/",async(req,res) => {
+  let comida = new Comida();
+  let respuesta = await comida.mostrar(req.query.id_comida);
+  if(respuesta.mensaje == null){
+    res.status(201).send(respuesta);
+  }else{
+    res.status(404).send(respuesta);
+  }
+}); 
+
+//--Editar los datos de una comida MM-38
+router.put("/:id_comida",async(req,res) => {
+  let comida = new Comida();
+  comida.setNombre(req.body.nombre);
+  comida.setPrecio(req.body.precio);
+  comida.setDescripcion(req.body.descripcion)
+  comida.setIdComida(req.params.id_comida)
+  let respuesta =await comida.editar();
+  if(respuesta == true){
+    res.status(201).send({"mensaje":"La edición se ejecuto correctamente."});
+  }else{
+    res.status(404).send({"mensaje":"Error al editar."});
+  }
+}); 
+
+//--Eliminar comida 
+router.delete("/:id",async(req,res) => {
+  let comida = new Comida();
+  let respuesta =await comida.eliminar(req.params.id);
+  if(respuesta == true){
+    res.status(201).send({"mensaje":"La comida se elimino correctamente"});
+  }else{
+    res.status(404).send({"mensaje":"Error al eliminar."});
+  }
+}); 
 
 
 
