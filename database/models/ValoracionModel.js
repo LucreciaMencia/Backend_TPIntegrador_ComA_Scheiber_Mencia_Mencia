@@ -21,7 +21,7 @@ class ValoracionModel{
     static async valoracionesComensal(idComensal){
       return new Promise((resolve, reject) => {
         let db = new Database();
-        let $query = 'SELECT * FROM valoracion WHERE id_usuario = ? ';
+        let $query = 'SELECT comida.id_comida, nombre_comida, precio_comida, descripcion_comida, promedio_estrellas, nombre_resto FROM comida INNER JOIN restaurante ON restaurante.id_usuario=comida.id_usuario INNER JOIN valoracion ON valoracion.id_comida=comida.id_comida INNER JOIN comensal ON comensal.id_usuario=valoracion.id_usuario AND comensal.id_usuario=?';
         db.getConexion().query($query, idComensal, function (err, rows, fields) {
           if (err) {
             //False significa un error en la conexion a la DB

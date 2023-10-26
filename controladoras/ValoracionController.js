@@ -27,14 +27,14 @@ router.post('/',LoginController.verificarToken,async (req,res) => {
     
   })
 
-  //obtener todas las valoraciones de un usuario
+  //obtener todas las valoraciones de un usuario MM-58
   router.get('/',async (req,res) => {
 
     let valoracion = new Valoracion();
     console.log(req.query.id_usuario);
     let respuesta = await valoracion.valoracionesComensal(req.query.id_usuario);
     if(respuesta == false){
-      res.status(404).send(respuesta);
+      res.status(404).send({"mensaje":"Error al traer las valoraciones."});
     }else{
       res.status(201).send(respuesta);
     }
