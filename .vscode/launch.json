@@ -10,7 +10,7 @@
             "type": "node",
             "request": "launch",
             "name": "Debuggear backend",
-            "runtimeExecutable": "/home/lulu/.nvm/versions/node/v18.17.0/bin/node",
+            "runtimeExecutable": "/home/lucrecia/.nvm/versions/node/v21.1.0/bin/node",
             "skipFiles": [
                 "<node_internals>/**"
             ],
