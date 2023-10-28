@@ -1,5 +1,5 @@
 const Database = require('../Database');
-const Comida = require('../../objetos/Comida');
+
 
 
 class ComidaController{

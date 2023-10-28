@@ -42,18 +42,7 @@ router.put("/:id_usuario",LoginController.verificarToken, async function(req,res
     }
 })
 
-//traer comidas de un restaurante
-router.get("/menu",async function(req,res,next){
-    let restaurante = new Restaurante();
-    restaurante.getUsuario().setId_usuario(req.query.id_restaurante);
-    let respuesta = await restaurante.mostrarMenu();
-    if(respuesta.message == null){
-        res.status(201).send(respuesta);
-    }else{
-        res.status(404).json(respuesta);
-    }
-    
-})
+
 
 //eliminar al restaurante MM-30(aun falta)
 router.delete("/:id_usuario",async function(req,res,next){

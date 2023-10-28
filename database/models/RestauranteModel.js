@@ -26,7 +26,7 @@ class RestauranteController {
         if(err){
           resolve (null) 
         }else{
-          resolve (rows)
+          resolve (rows[0])
         }
       })
 

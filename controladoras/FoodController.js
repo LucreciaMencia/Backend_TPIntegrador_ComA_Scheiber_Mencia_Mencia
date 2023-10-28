@@ -1,10 +1,9 @@
 const express = require('express');
-const Usuario = require('../objetos/Usuario');
 const Comida = require('../objetos/Comida');
-const Respuesta = require('../objetos/Respuesta');
+const Valoracion = require('../objetos/Valoracion')
+const Restaurante = require('../objetos/Restaurante')
 const LoginController = require('./LoginController');
 const fs = require('fs');
-const jwt = require('jsonwebtoken');
 const router = express.Router();
 const multer = require('multer');
 require('dotenv').config() // se necesita este import en cada archivo donde necesite leer algo del archivo .env
@@ -60,13 +59,34 @@ router.post("/image/descargar",async(req,res) => {
 
 //--Traer datos de una comida MM-37
 router.get("/",async(req,res) => {
-  let comida = new Comida();
-  let respuesta = await comida.mostrar(req.query.id_comida);
-  if(respuesta.mensaje == null){
-    res.status(201).send(respuesta);
-  }else{
-    res.status(404).send(respuesta);
+  if (req.query.id_comida != null) {
+    let comida = new Comida();
+    let respuesta = await comida.mostrar(req.query.id_comida);
+    if (respuesta.mensaje == null) {
+      res.status(201).send(respuesta);
+    } else {
+      res.status(404).send(respuesta);
+    }
+  }else if(req.query.id_usuario != null){  //obtener todas las valoraciones de un usuario
+    let valoracion = new Valoracion();
+    console.log(req.query.id_usuario);
+    let respuesta = await valoracion.valoracionesComensal(req.query.id_usuario);
+    if(respuesta == false){
+      res.status(404).send(respuesta);
+    }else{
+      res.status(201).send(respuesta);
+    }
+  }else if(req.query.id_restaurante != null){ //traer comidas de un restaurante
+    let restaurante = new Restaurante();
+    restaurante.getUsuario().setId_usuario(req.query.id_restaurante);
+    let respuesta = await restaurante.mostrarMenu();
+    if(respuesta.message == null){
+        res.status(201).send(respuesta);
+    }else{
+        res.status(404).json(respuesta);
+    }
   }
+
 }); 
 
 //--Editar los datos de una comida MM-38
@@ -94,6 +114,7 @@ router.delete("/:id",async(req,res) => {
     res.status(404).send({"mensaje":"Error al eliminar."});
   }
 }); 
+
 
 
 
