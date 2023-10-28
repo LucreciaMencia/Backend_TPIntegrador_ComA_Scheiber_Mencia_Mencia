@@ -86,6 +86,14 @@ router.get("/",async(req,res) => {
     }else{
         res.status(404).json(respuesta);
     }
+  }else{
+    let comida = new Comida();
+    let respuesta = await comida.traerTodas();
+    if(respuesta == false){
+      res.status(404).send(respuesta);
+    }else{
+      res.status(201).send(respuesta);
+    }
   }
 
 }); 
