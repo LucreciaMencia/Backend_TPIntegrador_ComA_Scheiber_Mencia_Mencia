@@ -70,6 +70,20 @@ class ComidaController{
       });
     };
 
+    static async traerTodasComidas(){
+      return new Promise((resolve, reject) => {
+        let db = new Database();
+        let $query = 'SELECT id_comida,nombre_comida,precio_comida,descripcion_comida,promedio_estrellas,nombre_resto FROM comida INNER JOIN restaurante ON restaurante.id_usuario = comida.id_usuario';
+        db.getConexion().query($query,function(err,rows,fields){
+          if (err) {
+            console.log(err);
+            resolve(false); 
+          }else{
+            resolve(rows);
+          }
+        });
+      });
+    }
 }
 
 module.exports = ComidaController;

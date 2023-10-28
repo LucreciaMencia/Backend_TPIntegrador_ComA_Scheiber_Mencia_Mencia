@@ -14,7 +14,7 @@ router.post('/',LoginController.verificarToken,async (req,res) => {
     let valoracion = new Valoracion();
     valoracion.setIdUsuario(await LoginController.extrarId(req.headers.authorization));
     valoracion.setIdComida(req.body.idComida);
-    valoracion.setPuntaje(req.body.estrellas); 
+    valoracion.setPuntaje(req.body.puntaje); 
     let respuesta = await valoracion.cargarValoracion();
     if(respuesta == 200){
       res.status(respuesta);
@@ -27,6 +27,23 @@ router.post('/',LoginController.verificarToken,async (req,res) => {
     
   })
 
+<<<<<<< HEAD
+=======
+  //obtener todas las valoraciones de un usuario MM-58
+  router.get('/',async (req,res) => {
+
+    let valoracion = new Valoracion();
+    console.log(req.query.id_usuario);
+    let respuesta = await valoracion.valoracionesComensal(req.query.id_usuario);
+    if(respuesta == false){
+      res.status(404).send({"mensaje":"Error al traer las valoraciones."});
+    }else{
+      res.status(201).send(respuesta);
+    }
+
+      
+    })
+>>>>>>> main
   
   //borrar una valoracion.
     router.delete('/',async (req,res) => {
@@ -36,7 +53,7 @@ router.post('/',LoginController.verificarToken,async (req,res) => {
       if(respuesta == false){
         res.status(404).send({"mensaje":"Error al borrar la valoración."});
       }else{
-        res.status(201).send({"mensaje":"La valoración a sido eliminada exitosamente."});
+        res.status(201).send({"mensaje":"La valoración ha sido eliminada exitosamente."});
       } 
   
         

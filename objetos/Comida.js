@@ -89,6 +89,10 @@ class Comida{
     async eliminar(id){
         return await ComidaModel.eliminarComida(id);
     }
+    //----------traer todas las comidas--------------------
+    async traerTodas(){
+        return await ComidaModel.traerTodasComidas();
+    }
     
     
 }
