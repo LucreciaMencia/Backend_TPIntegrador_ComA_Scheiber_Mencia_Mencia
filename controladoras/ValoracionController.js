@@ -27,8 +27,7 @@ router.post('/',LoginController.verificarToken,async (req,res) => {
     
   })
 
-<<<<<<< HEAD
-=======
+
   //obtener todas las valoraciones de un usuario MM-58
   router.get('/',async (req,res) => {
 
@@ -43,7 +42,7 @@ router.post('/',LoginController.verificarToken,async (req,res) => {
 
       
     })
->>>>>>> main
+
   
   //borrar una valoracion.
     router.delete('/',async (req,res) => {
