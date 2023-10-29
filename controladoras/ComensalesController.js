@@ -13,7 +13,7 @@ router.get('/:id', async function (req, res, next){
         res.send('Error en lectura de informacion del comensal.')
     }else{
         res.status(201);
-        res.json(respuesta);
+        res.json(respuesta[0]);
     }
 })
 
