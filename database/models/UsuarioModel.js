@@ -1,5 +1,6 @@
 
 const Database = require('../Database');
+const ejecutarQuery = require('../ejecutarQuery');
 
 
 class UsuarioController{
@@ -111,20 +112,25 @@ class UsuarioController{
     }
     //modificar
     static async actualizar(id, nickname, mail, password){
-      return new Promise((resolve, reject) => {
-        let db = new Database();
-        let $query = 'UPDATE usuario SET nickname=?, mail=?, password=? WHERE id_usuario=?';
-        db.getConexion().query($query, [nickname,mail,password,id], function (err, rows, fields) {
-          if (err) {
-            //False significa un error en la conexion a la DB
+      if (password) {
+        // Si vino el password, actualizamos solo eso
+        const actualizarSoloPass = 'UPDATE usuario SET password=? WHERE id_usuario=?';
+        
+        return ejecutarQuery(actualizarSoloPass, [password, id])
+          .then(() => true)
+          .catch((err) => {
             console.log(err);
-            resolve(false);
-          } else {
-            //True significa que la modificacion fue exitosa 
-            resolve(true);
-          }
-        });
-      });
+            return false;
+          });
+      } else {
+        // Si no vino el password, actualizamos solo nickname y mail
+        // Cualquier otra combinacion no es valida
+        const actualizarNick_y_Mail = 'UPDATE usuario SET nickname=?, mail=? WHERE id_usuario=?';
+
+        return ejecutarQuery(actualizarNick_y_Mail, [nickname, mail, id])
+          .then(() => true)
+          .catch(() => false);
+      }
     }
 }
 

@@ -23,7 +23,7 @@ router.put('/:id',async function(req,res,next){
     usuario.setPassword(req.body.password);
     let respuesta = await usuario.actualizarUsuario();
     if (respuesta.mensaje == null){
-        res.status(201).send(respuesta);
+        res.status(200).send(respuesta);
     }else{
         res.status(404).send(respuesta);
     }

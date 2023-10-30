@@ -96,7 +96,7 @@ class Usuario{
     async actualizarUsuario(){
         let respuesta = await UsuarioModel.actualizar(this.#id_usuario,this.#nickname,this.#mail,this.#password);
         if(respuesta == true){
-            return {"mensaje":"Exito al actualizar."}
+            return {"mensaje": null}
         }else{
             return {"mensaje":"Error al actualizar."}
         }
