@@ -1,3 +1,4 @@
+const ejecutarQuery = require('../ejecutarQuery')
 const Database = require('../Database');
 
 
@@ -56,18 +57,17 @@ class ComidaController{
     }
 
     static async eliminarComida(id){
-      return new Promise((resolve, reject) => {
-        let db = new Database();
-        let $query = 'DELETE FROM comida WHERE id_comida = ?';
-        db.getConexion().query($query,id,function(err,rows,fields){
-          if (err) {
-            console.log(err);
-            resolve(false); 
-          }else{
-            resolve(true);
-          }
-        });
-      });
+      const borrarValoraciones = 'DELETE FROM valoracion WHERE id_comida = ?'
+
+      let borrarComida = 'DELETE FROM comida WHERE id_comida = ?';
+
+      return ejecutarQuery(borrarValoraciones, id) 
+      .then(resultado => ejecutarQuery(borrarComida, id))
+      .then(resultado => true)
+      .catch(err => {
+        console.log(err)
+        return false
+      })
     };
 
     static async traerTodasComidas(){

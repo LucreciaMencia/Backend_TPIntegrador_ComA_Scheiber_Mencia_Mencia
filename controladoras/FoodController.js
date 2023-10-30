@@ -121,8 +121,9 @@ router.put("/:id_comida", async (req, res) => {
 //--Eliminar comida 
 router.delete("/:id", async (req, res) => {
   let comida = new Comida();
-  let respuesta = await comida.eliminar(req.params.id);
-  if (respuesta == true) {
+  const id = parseInt(req.params.id)
+  let respuesta = await comida.eliminar(id);
+  if (respuesta === true) {
     res.status(201).send({ "mensaje": "La comida se elimino correctamente" });
   } else {
     res.status(404).send({ "mensaje": "Error al eliminar." });
