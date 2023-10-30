@@ -53,7 +53,7 @@ async cargarValoracion(){
 async valoracionesComensal(idComensal){
     let respuesta = await ValoracionModel.valoracionesComensal(idComensal);
     if(respuesta == false){
-        return {"mensaje":"No se encontraron valoraciones."}
+        return [];
     }else{
         return respuesta;
     }

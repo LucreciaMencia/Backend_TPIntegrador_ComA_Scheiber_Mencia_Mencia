@@ -45,10 +45,10 @@ router.post('/',LoginController.verificarToken,async (req,res) => {
 
   
   //borrar una valoracion.
-    router.delete('/',async (req,res) => {
+    router.delete('/:id_valoracion',async (req,res) => {
 
       let valoracion = new Valoracion();
-      let respuesta = valoracion.borrar(req.query.id_valoracion);
+      let respuesta = valoracion.borrar(req.params.id_valoracion);
       if(respuesta == false){
         res.status(404).send({"mensaje":"Error al borrar la valoración."});
       }else{

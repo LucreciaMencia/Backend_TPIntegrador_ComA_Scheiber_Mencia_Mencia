@@ -62,3 +62,16 @@ id_comida INT NOT NULL,
 ruta VARCHAR (255),
 FOREIGN KEY (id_comida) REFERENCES comida(id_comida)
 );
+
+DELIMITER //
+CREATE TRIGGER actualizar_puntos
+AFTER INSERT ON valoracion
+FOR EACH ROW 
+BEGIN
+    UPDATE comida
+    SET
+        promedio_estrellas = (SELECT AVG(puntaje) FROM valoracion WHERE id_comida = NEW.id_comida)
+    WHERE id_comida = NEW.id_comida;
+END;
+//
+DELIMITER ;

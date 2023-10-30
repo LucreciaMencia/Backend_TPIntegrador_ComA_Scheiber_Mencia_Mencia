@@ -27,6 +27,7 @@ class ValoracionModel{
         precio_comida,
         descripcion_comida,
         puntaje,
+        id_valoracion,
         nombre_resto,
         restaurante.id_usuario as id_restaurante
     FROM
